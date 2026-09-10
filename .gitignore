@@ -1,0 +1,8 @@
+repo-meta.txt
+__pycache__/
+*.pyc
+node_modules/
+dist/
+build/
+*.egg-info/
+.DS_Store

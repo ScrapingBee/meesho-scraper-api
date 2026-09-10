@@ -1,0 +1,53 @@
+name: checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  syntax:
+    name: Example syntax
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Python
+        run: |
+          for f in examples/*.py; do python -m py_compile "$f"; done
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Node
+        run: |
+          for f in examples/*.js; do node --check "$f"; done
+
+      - name: Shell
+        run: |
+          for f in examples/*.sh; do bash -n "$f"; done
+
+  links:
+    name: Documentation links resolve
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check every scrapingbee.com and github.com URL
+        run: |
+          fail=0
+          urls=$(grep -ohE 'https://(www\.)?(scrapingbee|github)\.com[^)"< ]*' README.md examples/* 2>/dev/null \
+                 | sed 's/[.,]$//' | sort -u)
+          for u in $urls; do
+            code=$(curl -s -o /dev/null -w "%{http_code}" -L --max-time 30 "$u" || echo 000)
+            if [ "$code" != "200" ]; then
+              echo "FAIL $code $u"
+              fail=1
+            else
+              echo "ok   $u"
+            fi
+          done
+          exit $fail
