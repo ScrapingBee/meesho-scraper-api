@@ -18,18 +18,34 @@ jobs:
           python-version: "3.12"
       - name: Python
         run: |
-          for f in examples/*.py; do python -m py_compile "$f"; done
+          shopt -s nullglob
+          files=(examples/*.py)
+          if [ ${#files[@]} -eq 0 ]; then echo "no python examples"; exit 0; fi
+          for f in "${files[@]}"; do echo "checking $f"; python -m py_compile "$f"; done
 
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
       - name: Node
         run: |
-          for f in examples/*.js; do node --check "$f"; done
+          shopt -s nullglob
+          files=(examples/*.js)
+          if [ ${#files[@]} -eq 0 ]; then echo "no node examples"; exit 0; fi
+          for f in "${files[@]}"; do echo "checking $f"; node --check "$f"; done
+
+      - name: JSON
+        run: |
+          shopt -s nullglob
+          files=(examples/*.json)
+          if [ ${#files[@]} -eq 0 ]; then echo "no json examples"; exit 0; fi
+          for f in "${files[@]}"; do echo "checking $f"; python -c "import json,sys;json.load(open(sys.argv[1]))" "$f"; done
 
       - name: Shell
         run: |
-          for f in examples/*.sh; do bash -n "$f"; done
+          shopt -s nullglob
+          files=(examples/*.sh)
+          if [ ${#files[@]} -eq 0 ]; then echo "no shell examples"; exit 0; fi
+          for f in "${files[@]}"; do echo "checking $f"; bash -n "$f"; done
 
   links:
     name: Documentation links resolve
