@@ -6,8 +6,6 @@
   </a>
 </p>
 
-
-
 [![checks](https://github.com/ScrapingBee/meesho-scraper-api/workflows/checks/badge.svg)](https://github.com/ScrapingBee/meesho-scraper-api/actions)
 [![npm](https://img.shields.io/npm/v/meesho-scraper-api.svg)](https://www.npmjs.com/package/meesho-scraper-api)
 [![node](https://img.shields.io/node/v/meesho-scraper-api.svg)](https://www.npmjs.com/package/meesho-scraper-api)
@@ -272,10 +270,6 @@ There generally is not one. `brand.name` holds the individual supplier, because 
 
 **How do I skip sponsored listings?**
 Filter on `is_ad_product` from the application state. It is not exposed in the structured data.
-
-## Credits
-
-Built and maintained by [wordstotech](https://github.com/wordstotech-design). Powered by ScrapingBee.
 
 ## License
 
