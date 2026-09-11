@@ -2,9 +2,11 @@
 
 <p align="center">
   <a href="https://www.scrapingbee.com/">
-    <img src="REPLACE_WITH_SCREENSHOT_URL" alt="meesho-scraper-api" />
+    <img src="https://github.com/user-attachments/assets/72d3d815-8b71-41b6-a712-bf157539ecf4" alt="meesho-scraper-api" />
   </a>
 </p>
+
+
 
 [![checks](https://github.com/ScrapingBee/meesho-scraper-api/workflows/checks/badge.svg)](https://github.com/ScrapingBee/meesho-scraper-api/actions)
 [![npm](https://img.shields.io/npm/v/meesho-scraper-api.svg)](https://www.npmjs.com/package/meesho-scraper-api)
